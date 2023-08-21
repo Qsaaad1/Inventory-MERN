@@ -1,5 +1,5 @@
 .home {
-  background-color: #030b6b;
+  background-color: #282935;
   min-height: 100vh;
 
   & nav {
@@ -41,6 +41,8 @@
   }
   & .hero-buttons a {
     color: #fff;
+    display: flex;
+    flex-direction: row;
   }
 }
 .hero-image {
