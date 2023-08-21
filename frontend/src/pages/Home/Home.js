@@ -38,14 +38,15 @@ const Home = () => {
       {/* HERO SECTION */}
       <section className="container hero">
         <div className="hero-text">
-          <h2>Inventory {"&"} Stock Management Solution</h2>
+          <h1>Invent-R</h1>
+          <h2>Inventory Management Solution</h2>
           <p>
             Inventory system to control and manage proucts in the warehouse in
-            real timeand integrated to make it easier to develop your business.
+            real time and integrated to make it easier to develop your business.
           </p>
           <div className="hero-buttons">
             <button className="--btn --btn-secondary">
-              <Link to="/dashboard">Free Trial 1 Month</Link>
+              <Link to="/dashboard">Dashboard</Link>
             </button>
           </div>
           <div className="--flex-start">
