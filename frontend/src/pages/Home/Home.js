@@ -41,7 +41,7 @@ const Home = () => {
           <h1>Invent-R</h1>
           <h2>Inventory Management Solution</h2>
           <p>
-            Inventory system to control and manage proucts in the warehouse in
+            Inventory system to control and manage products in the warehouse in
             real time and integrated to make it easier to develop your business.
           </p>
           <div className="hero-buttons">
