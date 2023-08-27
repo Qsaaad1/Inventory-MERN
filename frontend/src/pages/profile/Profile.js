@@ -48,16 +48,11 @@ const Profile = () => {
               <p>
                 <b>Email : </b> {profile?.email}
               </p>
-              <p>
-                <b>Phone : </b> {profile?.phone}
-              </p>
-              <p>
-                <b>Bio : </b> {profile?.bio}
-              </p>
+              
               <div>
-                <Link to="/edit-profile">
+                {/* <Link to="/edit-profile">
                   <button className="--btn --btn-primary">Edit Profile</button>
-                </Link>
+                </Link> */}
               </div>
             </span>
           </Card>
