@@ -63,19 +63,19 @@ const Contact = () => {
             <div className="icons">
               <span>
                 <FaPhoneAlt />
-                <p>070123123123</p>
+                <p>121212121212</p>
               </span>
               <span>
                 <FaEnvelope />
-                <p>Support@invent.com</p>
+                <p>Support@inventory.com</p>
               </span>
               <span>
                 <GoLocation />
-                <p>Abuja, Nigeria</p>
+                <p>Mumbai, India</p>
               </span>
               <span>
                 <FaTwitter />
-                <p>@ZinoTrust</p>
+                <p>@Spidey</p>
               </span>
             </div>
           </Card>
