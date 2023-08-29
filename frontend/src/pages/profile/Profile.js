@@ -1,72 +1,65 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import Card from "../../components/card/Card";
-import { SpinnerImg } from "../../components/loader/Loader";
-import useRedirectLoggedOutUser from "../../customHook/useRedirectLoggedOutUser";
-import { SET_NAME, SET_USER } from "../../redux/features/auth/authSlice";
-import { getUser } from "../../services/authService";
-import "./Profile.scss";
+.profile {
+  .card {
+    max-width:  600px;
+    display: flex;
+    justify-content: flex-start;
 
-const Profile = () => {
-  useRedirectLoggedOutUser("/login");
-  const dispatch = useDispatch();
+    background-color: whitesmoke;
 
-  const [profile, setProfile] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+    padding: 1rem 0;
 
-  useEffect(() => {
-    console.log("Getting use");
-    setIsLoading(true);
-    async function getUserData() {
-      const data = await getUser();
-      console.log(data);
-
-      setProfile(data);
-      setIsLoading(false);
-      await dispatch(SET_USER(data));
-      await dispatch(SET_NAME(data.name));
+    span.profile-photo {
+      text-align: center;
     }
-    getUserData();
-  }, [dispatch]);
 
-  return (
-    <div className="profile --my2">
-      {isLoading && <SpinnerImg />}
-      <>
-        {!isLoading && profile === null ? (
-          <p>Something went wrong, please reload the page...</p>
-        ) : (
-          <Card cardClass={"card --flex-dir-column"}>
-            <span className="profile-photo">
-              <img src={profile?.photo} alt="profilepic" />
-            </span>
-            <span className="profile-data">
-              <p>
-                <b>Name : </b> {profile?.name}
-              </p>
-              <p>
-                <b>Email : </b> {profile?.email}
-              </p>
-              <p>
-                <b>Phone : </b> {profile?.phone}
-              </p>
-              <p>
-                <b>Address : </b> {profile?.address}
-              </p>
-              
+    img {
+      width: 100%;
+      max-width: 350px;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+    span.profile-data {
+      margin: 0 1rem;
+    }
+    span.profile-data > * {
+      border-top: 1px solid #fff;
+      padding: 5px 0;
+    }
+  }
+  .cardPro{
+    max-width: 600px;
+    display: flex;
+    justify-content: flex-start;
 
-              <div>
-                <Link to="/edit-profile">
-                  <button className="--btn --btn-primary">Edit Profile</button>
-                </Link>
-              </div>
-            </span>
-          </Card>
-        )}
-      </>
-    </div>
-  );
-};
+    padding: 1rem;
+    padding: 1rem 0;
+    background-color: rgb(245, 245, 245);
+    span.profile-photo {
+      text-align: center;
+    }
 
-export default Profile;
+    img {
+      width: 100%;
+      max-width: 350px;
+      // margin-left: 10px;
+      // padding-right: 1rem;
+      // padding-left: 1rem;
+      // border-radius: 20px;
+      // border: 2px solid red;
+    }
+    span.profile-data {
+      margin: 0 1rem;
+    }
+    span.profile-data > * {
+      border-top: 1px solid #ccc;
+      padding: 5px 0;
+    }
+
+
+  }
+}
+@media screen and (max-width: 600px) {
+  span.profile-photo {
+    margin: auto;
+  }
+}
