@@ -8,66 +8,11 @@ import "./Profile.scss";
 import { toast } from "react-toastify";
 import { updateUser } from "../../services/authService";
 import ChangePassword from "../../components/changePassword/ChangePassword";
-import ImageCropper from "./imageCropper";
-import FileInput from "./FileInput";
 
 const EditProfile = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const user = useSelector(selectUser);
-  const { email } = user;
-
-  const [image, setImage] = useState("");
-  const [currentPage, setCurrentPage] = useState("choose-img");
-  const [imgAfterCrop, setImgAfterCrop] = useState("");
-
-  // Invoked when new image file is selected
-  const onImageSelected = (selectedImg) => {
-    setImage(selectedImg);
-    setCurrentPage("crop-img");
-  };
-
-  // Generating Cropped Image When Done Button Clicked
-  const onCropDone = (imgCroppedArea) => {
-    const canvasEle = document.createElement("canvas");
-    canvasEle.width = imgCroppedArea.width;
-    canvasEle.height = imgCroppedArea.height;
-
-    const context = canvasEle.getContext("2d");
-
-    let imageObj1 = new Image();
-    imageObj1.src = image;
-    imageObj1.onload = function () {
-      context.drawImage(
-        imageObj1,
-        imgCroppedArea.x,
-        imgCroppedArea.y,
-        imgCroppedArea.width,
-        imgCroppedArea.height,
-        0,
-        0,
-        imgCroppedArea.width,
-        imgCroppedArea.height
-      );
-
-      const dataURL = canvasEle.toDataURL("image/jpeg");
-
-      setImgAfterCrop(dataURL);
-      setCurrentPage("img-cropped");
-    };
-  };
-
-  // Handle Cancel Button Click
-  const onCropCancel = () => {
-    setCurrentPage("choose-img");
-    setImage("");
-  };
-
-  useEffect(() => {
-    if (!email) {
-      navigate("/profile");
-    }
-  }, [email, navigate]);
 
   const initialState = {
     name: user?.name,
@@ -88,7 +33,7 @@ const EditProfile = () => {
     setProfileImage(e.target.files[0]);
   };
 
-  const saveProfile = async (e) => {
+  const saveImage = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
@@ -134,14 +79,37 @@ const EditProfile = () => {
     }
   };
 
+  const saveProfile = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+
+        // Save Profile
+        const formData = {
+          name: profile.name,
+          phone: profile.phone,
+          address: profile.address,
+        };
+
+        const data = await updateUser(formData);
+        console.log(data);
+        toast.success("User updated");
+        navigate("/profile");
+        setIsLoading(true);
+      }
+     catch (error) {
+      console.log(error);
+      setIsLoading(false);
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div className="profile --my2">
       {isLoading && <Loader />}
 
       <Card cardClass={"card --flex-dir-column"}>
-        <span className="profile-photo">
-          <img src={user?.photo} alt="profilepic" />
-        </span>
         <form className="--form-control --m" onSubmit={saveProfile}>
           <span className="profile-data">
             <p>
@@ -176,65 +144,32 @@ const EditProfile = () => {
                 onChange={handleInputChange}
               />
             </p>
-            <p>
-              <label>Photo:</label>
-              <div>
-{/* -------------------------------------------------------------------------------------------------------------------------------- */}
-{/* -------------------------------------------------------------------------------------------------------------------------------- */}
-{/* -------------------------------------------------------------------------------------------------------------------------------- */}
-{/* <div>
-      {currentPage === "choose-img" ? (
-        <FileInput setImage={setImage} onImageSelected={onImageSelected} />
-      ) : currentPage === "crop-img" ? (
-        <ImageCropper
-          image={image}
-          onCropDone={onCropDone}
-          onCropCancel={onCropCancel}
-        />
-      ) : (
-        <div>
-          <div>
-            <img src={imgAfterCrop} className="cropped-img" />
-          </div>
 
-          <button
-            onClick={() => {
-              setCurrentPage("crop-img");
-            }}
-            className="btn"
-          >
-            Crop
-          </button>
-
-          <button
-            onClick={() => {
-              setCurrentPage("choose-img");
-              setImage("");
-            }}
-            className="btn"
-          >
-            New Image
-          </button>
-        </div>
-      )}
-      </div> */}
-
-{/* --------------------------------------------------------------------------------------------------- */}
- {/* --------------------------------------------------------------------------------------------------- */}
-      {/* --------------------------------------------------------------------------------------------------- */}
-
-                
-              </div>
-                <input type="file" name="image" onChange={handleImageChange} />
-            </p>
             <div>
-              <button className="--btn --btn-primary">Edit Profile</button>
+              <button className="--btn --btn-primary" onClick={saveProfile}>
+                Save Changes
+              </button>
             </div>
           </span>
         </form>
       </Card>
       <br />
+      <Card cardClass={"card --flex-dir-column"}>
+        <span className="profile-photo">
+          <img src={user?.photo} alt="profilepic" />
+        </span>
+        <p>
+          <label>Photo:</label>
+          <input type="file" name="image" onChange={handleImageChange} />
+        </p>
+        <div>
+              <button className="--btn --btn-primary" onClick={saveImage} >Change Image</button>
+            </div>
+      </Card>
+
+      <br />
       <ChangePassword />
+      <br />
     </div>
   );
 };
