@@ -1,0 +1,89 @@
+.profile {
+
+
+
+  .divider{
+    display: flex;
+    font-size: x-large;
+    color: black;
+    justify-content: space-between;
+  }
+  
+  .dividerbtn{
+    display: flex;
+    justify-content:  center;
+    margin-top: 20px;
+  }
+  
+ 
+  .card {
+    max-width:  1500px;
+    display: flex;
+    justify-content: flex-start;
+
+    background-color: whitesmoke;
+
+    padding: 1rem 0;
+
+    span.profile-photo {
+      text-align:left;
+    }
+
+    img {
+      width: 100%;
+      max-width: 200px;
+      min-width: 150px;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+    span.profile-data {
+      margin: 0 1rem;
+      // background-color: rgb(63, 183, 61);
+      width: 900px;
+    }
+    span.profile-data > * {
+      border-top: 1px solid #fff;
+      padding: 5px 0;
+      
+    }
+    
+   
+  }
+
+
+
+  .cardProfile{
+    // max-width: 600px;
+    display: flex;
+    justify-content: flex-start;
+
+    padding: 1rem;
+    padding: 1rem 0;
+    background-color: rgb(245, 245, 245);
+    span.profile-photo {
+      text-align: center;
+    }
+
+    img {
+      width: 100%;
+      max-width: 200px;
+      min-width: 150px;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+    span.profile-data {
+      margin: 0 1rem;
+    }
+    span.profile-data > * {
+      border-top: 1px solid #ccc;
+      padding: 5px 0;
+    }
+
+
+  }
+}
+@media screen and (max-width: 600px) {
+  span.profile-photo {
+    margin: auto;
+  }
+}
